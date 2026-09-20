@@ -1,0 +1,36 @@
+# Python & Environments
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+build/
+dist/
+*.egg-info/
+.venv/
+env/
+
+# Sensitive Data & Local State
+.env
+*.db
+*.sqlite
+*.sqlite3
+*.eml
+*.msg
+private/
+output/
+data/*.db
+data/*.sqlite
+
+# Generated Documents
+*.pdf
+*.log
+*.aux
+*.out
+
+# OS Artifacts
+.DS_Store
+Thumbs.db
+
+# Local secret / testing configurations
+*.local
+.pii_patterns.local

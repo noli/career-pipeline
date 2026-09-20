@@ -1,0 +1,13 @@
+# Career Pipeline Configuration
+database_path: "data/jobs.db"
+target_companies_path: "configs/target_companies.json"
+persona_path: "configs/persona.yaml"
+output_dir: "output"
+
+# Thresholds
+high_match_threshold: 85
+digest_min_threshold: 70
+digest_max_threshold: 84
+
+# Tectonic PDF Compilation
+compile_pdfs: true

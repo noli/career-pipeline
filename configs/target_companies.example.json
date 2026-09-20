@@ -1,0 +1,524 @@
+{
+  "version": "2.0",
+  "updated_at": "2026-09-10T16:58:00Z",
+  "companies": [
+    {
+      "name": "planqc",
+      "sector": "Quantum Computing (Neutral Atoms)",
+      "ats_type": "personio",
+      "ats_id": "planqc-gmbh",
+      "location_filter": [
+        "Munich",
+        "M\u00fcnchen",
+        "Garching",
+        "Germany",
+        "Remote"
+      ],
+      "enabled": true
+    },
+    {
+      "name": "IQM Quantum Computers",
+      "sector": "Quantum Computing (Superconducting Qubits)",
+      "ats_type": "teamtailor",
+      "ats_id": "iqm",
+      "location_filter": [
+        "Munich",
+        "M\u00fcnchen",
+        "Garching",
+        "Germany",
+        "Hybrid",
+        "Remote"
+      ],
+      "enabled": true
+    },
+    {
+      "name": "Munich Quantum Valley",
+      "sector": "Quantum Hub (Hardware, Roadmap & Industry)",
+      "ats_type": "mqv",
+      "ats_id": "munich-quantum-valley",
+      "location_filter": [
+        "Munich",
+        "Garching"
+      ],
+      "enabled": true
+    },
+    {
+      "name": "Quantum-Systems",
+      "sector": "Autonomous Aerial Robotics & Fernride Autonomous Trucking",
+      "ats_type": "recruitee",
+      "ats_id": "https://career.quantum-systems.com/api/offers/",
+      "location_filter": [
+        "Gilching",
+        "Munich",
+        "M\u00fcnchen",
+        "Bayern",
+        "Bavaria",
+        "Remote"
+      ],
+      "enabled": true
+    },
+    {
+      "name": "The Exploration Company",
+      "sector": "Orbital Spacecraft & Aerospace Robotics",
+      "ats_type": "ashby",
+      "ats_id": "the-exploration-company",
+      "location_filter": [
+        "Munich",
+        "M\u00fcnchen",
+        "Germany",
+        "Remote"
+      ],
+      "enabled": true
+    },
+    {
+      "name": "Proxima Fusion",
+      "sector": "Fusion Energy & Magnetic Confinement (Stellarators)",
+      "ats_type": "ashby",
+      "ats_id": "proxima-fusion",
+      "location_filter": [
+        "Munich",
+        "M\u00fcnchen",
+        "Germany",
+        "Remote"
+      ],
+      "enabled": true
+    },
+    {
+      "name": "TOPTICA Photonics",
+      "sector": "Precision Diode Lasers & Quantum Photonics",
+      "ats_type": "toptica",
+      "ats_id": "careers.toptica.com",
+      "location_filter": [
+        "Gr\u00e4felfing",
+        "Munich",
+        "M\u00fcnchen",
+        "Germany"
+      ],
+      "enabled": true
+    },
+    {
+      "name": "Menlo Systems",
+      "sector": "Optical Frequency Combs & Laser Precision",
+      "ats_type": "personio",
+      "ats_id": "menlo-systems-gmbh",
+      "location_filter": [
+        "Martinsried",
+        "Munich",
+        "M\u00fcnchen"
+      ],
+      "enabled": true
+    },
+    {
+      "name": "Agile Robots",
+      "sector": "Intelligent Robotics & AI Hardware Systems",
+      "ats_type": "greenhouse",
+      "ats_id": "agilerobotsse",
+      "location_filter": [
+        "Munich",
+        "M\u00fcnchen",
+        "Germany"
+      ],
+      "enabled": true
+    },
+    {
+      "name": "Isar Aerospace",
+      "sector": "Orbital Launchers & Space Systems",
+      "ats_type": "greenhouse",
+      "ats_id": "isaraerospace",
+      "location_filter": [
+        "Munich",
+        "Ottobrunn",
+        "Germany"
+      ],
+      "enabled": true
+    },
+    {
+      "name": "Helsing",
+      "sector": "Defense AI & Sensor Processing",
+      "ats_type": "greenhouse",
+      "ats_id": "helsing",
+      "location_filter": [
+        "Munich",
+        "M\u00fcnchen",
+        "Germany",
+        "Remote"
+      ],
+      "enabled": true
+    },
+    {
+      "name": "kiutra",
+      "sector": "Cryogenics & Sub-Kelvin Magnetic Cooling",
+      "ats_type": "personio",
+      "ats_id": "kiutra",
+      "location_filter": [
+        "Munich",
+        "M\u00fcnchen"
+      ],
+      "enabled": true
+    },
+    {
+      "name": "QuantumDiamonds",
+      "sector": "Quantum Sensing & Diamond NV Centers",
+      "ats_type": "personio",
+      "ats_id": "quantum-diamond",
+      "location_filter": [
+        "Munich",
+        "M\u00fcnchen"
+      ],
+      "enabled": true
+    },
+    {
+      "name": "Blickfeld",
+      "sector": "LIDAR & 3D Spatial Perception",
+      "ats_type": "personio",
+      "ats_id": "blickfeld",
+      "location_filter": [
+        "Munich",
+        "M\u00fcnchen"
+      ],
+      "enabled": true
+    },
+    {
+      "name": "Celonis",
+      "sector": "Enterprise Process Intelligence & Applied AI",
+      "ats_type": "greenhouse",
+      "ats_id": "celonis",
+      "location_filter": [
+        "Munich",
+        "M\u00fcnchen",
+        "Germany",
+        "Remote"
+      ],
+      "enabled": true
+    },
+    {
+      "name": "Roland Berger",
+      "sector": "Strategy, Automotive & Deep Tech Consulting",
+      "ats_type": "smartrecruiters",
+      "ats_id": "rolandberger",
+      "location_filter": [
+        "Munich",
+        "M\u00fcnchen",
+        "Germany"
+      ],
+      "enabled": true
+    },
+    {
+      "name": "DELO Industrial Adhesives",
+      "sector": "Optical Adhesives & Microelectronic Packaging",
+      "ats_type": "workday",
+      "ats_config": {
+        "host": "delo.wd103.myworkdayjobs.com",
+        "tenant": "delo",
+        "site": "DELO-Jobs"
+      },
+      "location_filter": [
+        "Windach",
+        "Munich",
+        "M\u00fcnchen",
+        "Germany",
+        "Deutschland"
+      ],
+      "enabled": true
+    },
+    {
+      "name": "EOS GmbH",
+      "sector": "Industrial 3D Printing & Laser Sintering Systems",
+      "ats_type": "workday",
+      "ats_config": {
+        "host": "eosgroup.wd3.myworkdayjobs.com",
+        "tenant": "eosgroup",
+        "site": "eos"
+      },
+      "location_filter": [
+        "Krailling",
+        "Munich",
+        "M\u00fcnchen",
+        "Germany",
+        "Deutschland"
+      ],
+      "enabled": true
+    },
+    {
+      "name": "Mynaric",
+      "sector": "NewSpace & Satellite Laser Communications (OISL)",
+      "ats_type": "personio",
+      "ats_id": "mynaric",
+      "location_filter": [
+        "Munich",
+        "M\u00fcnchen",
+        "Gilching",
+        "Oberpfaffenhofen",
+        "Germany"
+      ],
+      "enabled": true
+    },
+    {
+      "name": "ICEYE",
+      "sector": "SAR Earth Observation Satellites & Space Systems",
+      "ats_type": "ashby",
+      "ats_id": "iceye",
+      "location_filter": [
+        "Munich",
+        "M\u00fcnchen",
+        "Germany"
+      ],
+      "enabled": true
+    },
+    {
+      "name": "OroraTech",
+      "sector": "Thermal-Infrared Satellite Constellations",
+      "ats_type": "personio",
+      "ats_id": "ororatech",
+      "location_filter": [
+        "Munich",
+        "M\u00fcnchen",
+        "Germany",
+        "Remote"
+      ],
+      "enabled": true
+    },
+    {
+      "name": "NavVis",
+      "sector": "Spatial AI, 3D Mobile Mapping & Digital Twins",
+      "ats_type": "greenhouse",
+      "ats_id": "navvis",
+      "location_filter": [
+        "Munich",
+        "M\u00fcnchen",
+        "Germany",
+        "Remote"
+      ],
+      "enabled": true
+    },
+    {
+      "name": "Magazino",
+      "sector": "Autonomous Mobile Robots (AMR) & Perception",
+      "ats_type": "personio",
+      "ats_id": "magazino",
+      "location_filter": [
+        "Munich",
+        "M\u00fcnchen",
+        "Germany"
+      ],
+      "enabled": true
+    },
+    {
+      "name": "Brainlab",
+      "sector": "Advanced Medical Technology, Surgical Navigation & Robotics",
+      "ats_type": "smartrecruiters",
+      "ats_id": "brainlab",
+      "location_filter": [
+        "Munich",
+        "M\u00fcnchen",
+        "Germany",
+        "Remote"
+      ],
+      "enabled": true
+    },
+    {
+      "name": "ImFusion",
+      "sector": "Medical Image Computing & Advanced Ultrasound AI",
+      "ats_type": "personio",
+      "ats_id": "imfusion",
+      "location_filter": [
+        "Munich",
+        "M\u00fcnchen",
+        "Germany"
+      ],
+      "enabled": true
+    },
+    {
+      "name": "Marvel Fusion",
+      "sector": "Laser-Driven Inertial Fusion & Plasma Diagnostics",
+      "ats_type": "greenhouse",
+      "ats_id": "marvelfusion",
+      "location_filter": [
+        "Munich",
+        "M\u00fcnchen",
+        "Garching",
+        "Germany"
+      ],
+      "enabled": true
+    },
+    {
+      "name": "Airbus Defence and Space",
+      "sector": "Space Systems, Optical Payloads & Satellite Communications",
+      "ats_type": "workday",
+      "ats_config": {
+        "host": "ag.wd3.myworkdayjobs.com",
+        "tenant": "ag",
+        "site": "Airbus",
+        "search_terms": [
+          "M\u00fcnchen",
+          "Munich",
+          "Ottobrunn",
+          "Taufkirchen"
+        ]
+      },
+      "location_filter": [
+        "M\u00fcnchen",
+        "Munich",
+        "Ottobrunn",
+        "Taufkirchen",
+        "Germany",
+        "Deutschland"
+      ],
+      "enabled": true
+    },
+    {
+      "name": "Hensoldt",
+      "sector": "Defense Optronics, Sensor Solutions & Airborne Radar",
+      "ats_type": "successfactors",
+      "ats_config": {
+        "base_url": "https://jobs.hensoldt.net",
+        "search_terms": [
+          "Taufkirchen",
+          "M\u00fcnchen",
+          "Oberkochen"
+        ],
+        "max_pages": 2
+      },
+      "location_filter": [
+        "Taufkirchen",
+        "M\u00fcnchen",
+        "Munich",
+        "Oberkochen",
+        "Germany",
+        "Deutschland"
+      ],
+      "enabled": true
+    },
+    {
+      "name": "Knorr-Bremse",
+      "sector": "Commercial Vehicle Autonomy, Braking & Mechatronic Systems",
+      "ats_type": "successfactors",
+      "ats_config": {
+        "base_url": "https://careers.knorr-bremse.com",
+        "search_terms": [
+          "M\u00fcnchen",
+          "Munich"
+        ],
+        "max_pages": 2
+      },
+      "location_filter": [
+        "M\u00fcnchen",
+        "Munich",
+        "Germany",
+        "Deutschland"
+      ],
+      "enabled": true
+    },
+    {
+      "name": "Rohde & Schwarz",
+      "sector": "Wireless Communications, RF, Quantum Electronics & Test Measurement",
+      "ats_type": "avature",
+      "ats_config": {
+        "base_url": "https://jobs.rohde-schwarz.com/en_US/careers",
+        "search_terms": [
+          "Munich",
+          "M\u00fcnchen"
+        ]
+      },
+      "location_filter": [
+        "Munich",
+        "M\u00fcnchen",
+        "Germany",
+        "Deutschland"
+      ],
+      "enabled": true
+    },
+    {
+      "name": "Siemens",
+      "sector": "Industrial Automation, Digital Enterprise & Systems Software",
+      "ats_type": "avature",
+      "ats_config": {
+        "base_url": "https://jobs.siemens.com/en_US/externaljobs",
+        "search_terms": [
+          "Munich",
+          "M\u00fcnchen"
+        ]
+      },
+      "location_filter": [
+        "Munich",
+        "M\u00fcnchen",
+        "Germany",
+        "Deutschland"
+      ],
+      "enabled": true
+    },
+    {
+      "name": "MTU Aero Engines",
+      "sector": "Commercial & Military Aero Propulsion, High-Temp Materials & Sensors",
+      "ats_type": "mtu",
+      "ats_config": {},
+      "location_filter": [
+        "M\u00fcnchen",
+        "Munich",
+        "Germany",
+        "Deutschland"
+      ],
+      "enabled": true
+    },
+    {
+      "name": "NVIDIA",
+      "sector": "Autonomous Vehicles (DRIVE), Physical AI, GPUs & Silicon Systems",
+      "ats_type": "workday",
+      "ats_config": {
+        "host": "nvidia.wd5.myworkdayjobs.com",
+        "tenant": "nvidia",
+        "site": "NVIDIAExternalCareerSite",
+        "search_terms": [
+          "Munich",
+          "M\u00fcnchen"
+        ]
+      },
+      "location_filter": [
+        "Munich",
+        "M\u00fcnchen",
+        "Germany"
+      ],
+      "enabled": true
+    },
+    {
+      "name": "Mobileye",
+      "sector": "Autonomous Driving Systems, Computer Vision, ADAS & Automotive SoC",
+      "ats_type": "lever",
+      "ats_id": "mobileye",
+      "location_filter": [
+        "Munich",
+        "M\u00fcnchen",
+        "Germany",
+        "Deutschland",
+        "Koblenz",
+        "Stuttgart"
+      ],
+      "enabled": true
+    }
+  ],
+  "ecosystem_queries": [
+    "site:careers.qualcomm.com Munich (Engineer OR Architect OR Manager OR Lead)",
+    "site:job.deloitte.com (M\u00fcnchen OR Munich) (AI OR Quantum OR Tech OR Strategy OR Architect)",
+    "site:jobs.apple.com/en-us/details Munich (Silicon OR PMIC OR Hardware OR Manager)",
+    "site:infineon.com/cms/en/careers Munich (System OR Director OR Architect OR Lead)",
+    "site:mckinsey.com/careers Munich (Quantum OR Semiconductor OR Automotive OR Associate OR Consultant)",
+    "site:careers.bcg.com Munich (Automotive OR Tech OR Consultant OR Leader)",
+    "site:rolandberger.com Munich (Automotive OR Operations OR \"Deep Tech\" OR Consultant)",
+    "site:asml.com/en/careers (Munich OR Remote OR Germany) (Metrology OR Optics OR Manager OR Systems)",
+    "site:zeiss.com/corporate/en/careers (Munich OR Oberkochen OR Garching) (Lithography OR SMT OR Optics OR Robotics OR Meditec)",
+    "site:trumpf.com/en_INT/careers (Munich OR Germany) (Laser OR EUV OR Photonics)",
+    "(\"Senior Physiker\" OR \"Optics Engineer\" OR \"Semiconductor Packaging\" OR \"LiDAR\") (\"Windach\" OR \"Krailling\" OR \"Puchheim\" OR \"Garching\" OR \"Martinsried\") (job OR karriere)",
+    "(\"quantum computing\" OR \"quantencomputing\" OR \"quantum hardware\" OR \"qubit\") (job OR stelle) (Munich OR M\u00fcnchen OR Garching OR Remote)",
+    "(\"Deep Tech\" OR \"Quantum\" OR \"Automotive\" OR \"Sensors\") (\"Principal Consultant\" OR \"Senior Manager\" OR \"Associate Partner\" OR \"Technology Advisor\") (Munich OR Remote OR Germany)",
+    "(\"Engineering Manager\" OR \"Director of Hardware\" OR \"Head of Systems\" OR \"Director of Technology\") (Munich OR Remote OR Germany)",
+    "(\"optical engineer\" OR \"photonics\" OR \"laser\" OR \"lidar\") (job OR career) (Munich OR M\u00fcnchen OR Munich Area OR Gilching OR Remote)",
+    "(\"laser communication\" OR \"satellite\" OR \"payload\" OR \"star tracker\") (job OR career) (Munich OR Gilching OR Oberpfaffenhofen OR Remote)",
+    "(\"surgical robotics\" OR \"surgical navigation\" OR \"medical robotics\" OR \"medical imaging\") (engineer OR lead OR manager) (Munich OR Remote)",
+    "(\"fusion energy\" OR \"plasma diagnostics\" OR \"stellarator\" OR \"inertial confinement\") (physicist OR engineer OR lead) (Munich OR Garching OR Germany)",
+    "(\"spatial ai\" OR \"mobile robotics\" OR \"slam\" OR \"point cloud\" OR \"amr\") (lead OR principal OR manager) (Munich OR M\u00fcnchen OR Remote)",
+    "(\"lithography\" OR \"euv\" OR \"wafer metrology\" OR \"precision optics\") (engineer OR architect OR lead) (Munich OR Germany OR Remote)",
+    "(\"autonomy hardware\" OR \"sensor fusion\" OR \"autonomous driving\" OR \"adas\") (lead OR senior OR principal) (Munich OR M\u00fcnchen OR Remote)",
+    "(\"Chief Engineer\" OR \"Head of Hardware\" OR \"Principal TPM\") (Munich OR M\u00fcnchen OR Remote)",
+    "(\"Forward Deployed Engineer\" OR \"Agentic AI\" OR \"Solutions Architect\") (Remote Germany OR Munich)"
+  ]
+}

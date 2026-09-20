@@ -1,0 +1,73 @@
+# Candidate Persona & Matching Configuration (Example)
+# Customize this file or point the pipeline to your private Profile.md
+contact:
+  name: "Jane Doe, Ph.D."
+  first_name: "Jane"
+  last_name: "Doe"
+  title: "Systems Architect & Deep-Tech Team Lead"
+  address_line1: "Sample Street 42"
+  address_line2: "80331 Munich, Germany"
+  phone: "+49 (0) 123 456789"
+  email: "jane.doe@example.com"
+  linkedin: "linkedin.com/in/example"
+  github: "github.com/example"
+
+preferences:
+  target_locations:
+    - "munich"
+    - "münchen"
+    - "garching"
+    - "martinsried"
+    - "remote"
+    - "germany"
+  excluded_locations:
+    - "london"
+    - "paris"
+    - "new york"
+    - "singapore"
+    - "tokyo"
+  dealbreaker_keywords:
+    - "junior"
+    - "trainee"
+    - "intern"
+    - "internship"
+    - "werkstudent"
+    - "praktikum"
+    - "recruiter"
+    - "hr manager"
+    - "accountant"
+    - "sales representative"
+
+pillars:
+  - id: "sensors_autonomy"
+    name: "Autonomous Sensors & Systems Engineering"
+    weight: 20
+    keywords: ["lidar", "radar", "camera", "sensor integration", "sensor fusion", "perception", "point cloud", "autonomous", "adas", "sensing"]
+
+  - id: "quantum_deeptech"
+    name: "Deep-Tech Physics, Optics & Quantum Systems"
+    weight: 20
+    keywords: ["optics", "optical", "photonics", "laser", "quantum", "qubit", "cryogenic", "interferometer", "spectroscopy", "micro-resonator", "spad"]
+
+  - id: "systems_industrialization"
+    name: "Technical Program Management & Systems Industrialization"
+    weight: 15
+    keywords: ["industrialization", "mass production", "dfm", "dfa", "dfmea", "bring-up", "pcb", "qualification", "systems engineering", "roadmap"]
+
+  - id: "ai_software"
+    name: "Modern AI & Computational Engineering"
+    weight: 15
+    keywords: ["pipeline", "python", "algorithms", "data analysis", "signal processing", "simulation", "applied ai", "machine learning", "llm"]
+
+  - id: "tech_strategy"
+    name: "Technology Strategy & Advisory"
+    weight: 15
+    keywords: ["consulting", "consultant", "advisory", "strategy", "transformation", "due diligence", "technology strategy", "innovation"]
+
+# Modular narrative templates for cover letter generation
+narratives:
+  default:
+    hook: "As a seasoned technical leader and systems engineer with over a decade of experience bridging fundamental physical principles with series hardware delivery, I offer a proven record of driving complex technical initiatives into high-reliability production."
+    experience: "Throughout my career, I have specialized in architecting and qualifying high-precision instrumentation operating under uncompromising operational constraints. My work encompasses the full lifecycle: defining system architecture and interface control documents, optimizing performance, ensuring compliance, and driving defect resolution across international supplier networks."
+    mitigation: "Where specific internal workflows or toolchains differ from my immediate stack, my track record demonstrates exceptional learning velocity and an ability to translate first-principles problem solving into rapid, measurable engineering success."
+    closing: "Based in the Munich area, I have followed your company trajectory and technological milestones with great admiration. I would welcome the opportunity to bring my engineering discipline, systems thinking, and leadership to your team."
