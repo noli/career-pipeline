@@ -27,6 +27,7 @@ def generate_cover_letter(
     persona: CandidatePersona,
     template_path: Path,
     output_dir: Path,
+    pdf_dir: Optional[Path] = None,
     compile_pdf: bool = True
 ) -> Dict[str, Any]:
     """
@@ -66,13 +67,13 @@ def generate_cover_letter(
     )
 
     rendered_tex = template.render(
-        candidate_name=persona.name,
-        candidate_first_name=persona.first_name,
-        candidate_last_name=persona.last_name,
-        candidate_title=persona.title,
-        candidate_address_line1=persona.address_line1,
-        candidate_address_line2=persona.address_line2,
-        candidate_phone=persona.phone,
+        candidate_name=latex_escape(persona.name),
+        candidate_first_name=latex_escape(persona.first_name),
+        candidate_last_name=latex_escape(persona.last_name),
+        candidate_title=latex_escape(persona.title),
+        candidate_address_line1=latex_escape(persona.address_line1),
+        candidate_address_line2=latex_escape(persona.address_line2),
+        candidate_phone=latex_escape(persona.phone),
         candidate_email=persona.email,
         safe_company=safe_company,
         safe_title=safe_title,
@@ -86,13 +87,14 @@ def generate_cover_letter(
 
     tex_path.write_text(rendered_tex, encoding="utf-8")
 
+    target_pdf_dir = pdf_dir or output_dir
     pdf_compiled = False
     if compile_pdf:
-        pdf_compiled = compile_tex_to_pdf(tex_path, output_dir)
+        pdf_compiled = compile_tex_to_pdf(tex_path, target_pdf_dir)
 
     return {
         "tex_path": tex_path,
-        "pdf_path": output_dir / pdf_filename if pdf_compiled else None,
+        "pdf_path": target_pdf_dir / pdf_filename if pdf_compiled else None,
         "tex_filename": tex_filename,
         "pdf_filename": pdf_filename if pdf_compiled else None
     }

@@ -14,6 +14,7 @@ from .models import CandidatePersona
 from .storage.db import init_db, is_seen, upsert_posting, save_evaluation, get_unscored_postings, get_stats, get_db_connection
 from .evaluator.matcher import evaluate_job
 from .generator.letter_engine import generate_cover_letter
+from .generator.typography import slugify
 from .generator.tectonic import is_tectonic_installed
 from .integrations.obsidian import load_vault_persona, generate_vault_opportunity_note, update_vault_opportunities_index
 from .integrations.apple_mail import export_apple_mail_alerts
@@ -109,6 +110,7 @@ def main():
     parser.add_argument("--company", type=str, default="", help="Company name for ad-hoc URL")
     parser.add_argument("--evaluate", action="store_true", help="Score all unscored postings in the database")
     parser.add_argument("--generate", action="store_true", help="Generate opportunity notes and letters for high matches")
+    parser.add_argument("--no-compile", action="store_true", help="Skip headless Tectonic PDF compilation")
     parser.add_argument("--stats", action="store_true", help="Print pipeline database metrics")
     parser.add_argument("--inbox", action="store_true", help="Parse .eml/.msg files from inbox directory")
     parser.add_argument("--sync-mail", action="store_true", help="Sync alert emails from Apple Mail (macOS only)")
@@ -200,7 +202,13 @@ def main():
 
     if args.generate or args.all:
         if vault_dir:
-            print("Generating OKF Opportunity Notes and Vault Index...")
+            print("Generating OKF Opportunity Notes, Cover Letters and Vault Index...")
+            template_path = repo_root / "templates" / "cover_letter.tex.jinja"
+            letters_dir = vault_dir / "Tailored_Letters"
+            pdf_dir = vault_dir / "PDFs"
+            letters_dir.mkdir(parents=True, exist_ok=True)
+            pdf_dir.mkdir(parents=True, exist_ok=True)
+
             with get_db_connection(db_path) as conn:
                 cur = conn.cursor()
                 cur.execute("""
@@ -217,6 +225,22 @@ def main():
                     if isinstance(r.get("gaps_risks"), str):
                         r["gaps_risks"] = [x.strip() for x in r["gaps_risks"].split("|") if x.strip()]
                     generate_vault_opportunity_note(vault_dir, r, r)
+
+                    if template_path.exists() and not args.no_compile:
+                        comp_slug = slugify(r.get("company", ""))
+                        title_slug = slugify(r.get("title", ""))[:40]
+                        tex_file = letters_dir / f"{comp_slug}_{title_slug}.tex"
+                        pdf_file = pdf_dir / f"{comp_slug}_{title_slug}.pdf"
+                        if not tex_file.exists() or not pdf_file.exists():
+                            generate_cover_letter(
+                                posting=r,
+                                evaluation=r,
+                                persona=persona,
+                                template_path=template_path,
+                                output_dir=letters_dir,
+                                pdf_dir=pdf_dir,
+                                compile_pdf=True
+                            )
             update_vault_opportunities_index(vault_dir)
             print("Vault opportunities synchronized successfully.")
         else:
