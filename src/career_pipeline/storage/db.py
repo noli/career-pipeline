@@ -1,9 +1,11 @@
 """
-career_pipeline.storage.db - SQLite Job Store & Deduplication Engine
+career_pipeline.storage.db - SQLite Persistence & Deduplication Layer
 Safe concurrency using context managers to prevent file-locking issues on Windows.
+Supports composite primary keys (posting_id, region) for parallel multi-region ranking.
 """
 import sqlite3
 import hashlib
+import json
 from pathlib import Path
 from datetime import datetime
 from typing import Optional, Dict, List, Any
@@ -15,7 +17,7 @@ def get_db_connection(db_path: Path) -> sqlite3.Connection:
     return conn
 
 def init_db(db_path: Path):
-    """Initializes the database schema if not already present."""
+    """Initializes or migrates the database schema to support multi-region evaluations."""
     with get_db_connection(db_path) as conn:
         conn.execute("""
             CREATE TABLE IF NOT EXISTS postings (
@@ -34,26 +36,88 @@ def init_db(db_path: Path):
                 status TEXT NOT NULL DEFAULT 'new'
             );
         """)
-        conn.execute("""
-            CREATE TABLE IF NOT EXISTS evaluations (
-                posting_id TEXT PRIMARY KEY REFERENCES postings(id) ON DELETE CASCADE,
-                fit_score INTEGER NOT NULL,
-                role_archetype TEXT,
-                seniority TEXT,
-                technical_alignment INTEGER,
-                seniority_impact INTEGER,
-                location_commute INTEGER,
-                company_mission INTEGER,
-                comp_potential INTEGER,
-                matching_pillars TEXT,
-                key_strengths TEXT,
-                gaps_risks TEXT,
-                pitch_strategy TEXT,
-                evaluated_at TEXT NOT NULL
-            );
-        """)
+
+        # Check if evaluations table needs migration to composite (posting_id, region)
+        cur = conn.cursor()
+        cur.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='evaluations'")
+        table_exists = cur.fetchone() is not None
+
+        needs_migration = False
+        if table_exists:
+            cur.execute("PRAGMA table_info(evaluations)")
+            cols = {row[1]: row for row in cur.fetchall()}
+            if "region" not in cols or cols["region"][5] == 0:
+                needs_migration = True
+
+        if needs_migration:
+            conn.execute("""
+                CREATE TABLE evaluations_new (
+                    posting_id TEXT REFERENCES postings(id) ON DELETE CASCADE,
+                    region TEXT NOT NULL DEFAULT 'munich',
+                    fit_score INTEGER NOT NULL,
+                    role_archetype TEXT,
+                    seniority TEXT,
+                    technical_alignment INTEGER,
+                    seniority_impact INTEGER,
+                    location_commute INTEGER,
+                    company_mission INTEGER,
+                    comp_potential INTEGER,
+                    matching_pillars TEXT,
+                    key_strengths TEXT,
+                    gaps_risks TEXT,
+                    pitch_strategy TEXT,
+                    opportunity_file TEXT,
+                    tailored_letter_file TEXT,
+                    compensation_estimate TEXT,
+                    evaluated_at TEXT NOT NULL,
+                    PRIMARY KEY (posting_id, region)
+                );
+            """)
+            conn.execute("""
+                INSERT OR IGNORE INTO evaluations_new (
+                    posting_id, region, fit_score, role_archetype, seniority,
+                    technical_alignment, seniority_impact, location_commute,
+                    company_mission, comp_potential, matching_pillars,
+                    key_strengths, gaps_risks, pitch_strategy,
+                    opportunity_file, tailored_letter_file, evaluated_at
+                )
+                SELECT
+                    posting_id, 'munich', fit_score, role_archetype, seniority,
+                    technical_alignment, seniority_impact, location_commute,
+                    company_mission, comp_potential, matching_pillars,
+                    key_strengths, gaps_risks, pitch_strategy,
+                    opportunity_file, tailored_letter_file, evaluated_at
+                FROM evaluations;
+            """)
+            conn.execute("DROP TABLE evaluations;")
+            conn.execute("ALTER TABLE evaluations_new RENAME TO evaluations;")
+        else:
+            conn.execute("""
+                CREATE TABLE IF NOT EXISTS evaluations (
+                    posting_id TEXT REFERENCES postings(id) ON DELETE CASCADE,
+                    region TEXT NOT NULL DEFAULT 'munich',
+                    fit_score INTEGER NOT NULL,
+                    role_archetype TEXT,
+                    seniority TEXT,
+                    technical_alignment INTEGER,
+                    seniority_impact INTEGER,
+                    location_commute INTEGER,
+                    company_mission INTEGER,
+                    comp_potential INTEGER,
+                    matching_pillars TEXT,
+                    key_strengths TEXT,
+                    gaps_risks TEXT,
+                    pitch_strategy TEXT,
+                    opportunity_file TEXT,
+                    tailored_letter_file TEXT,
+                    compensation_estimate TEXT,
+                    evaluated_at TEXT NOT NULL,
+                    PRIMARY KEY (posting_id, region)
+                );
+            """)
+
         conn.execute("CREATE INDEX IF NOT EXISTS idx_postings_status ON postings(status);")
-        conn.execute("CREATE INDEX IF NOT EXISTS idx_evaluations_score ON evaluations(fit_score);")
+        conn.execute("CREATE INDEX IF NOT EXISTS idx_evaluations_score_reg ON evaluations(region, fit_score);")
 
 def hash_content(text: str) -> str:
     return hashlib.sha256(text.encode("utf-8", errors="ignore")).hexdigest()
@@ -101,21 +165,26 @@ def upsert_posting(db_path: Path, posting: Dict[str, Any]) -> str:
         ))
         return post_id
 
-def save_evaluation(db_path: Path, evaluation: Dict[str, Any]):
+def save_evaluation(db_path: Path, evaluation: Dict[str, Any], region: str = "munich"):
     with get_db_connection(db_path) as conn:
         cur = conn.cursor()
-        pillars_str = ",".join(evaluation.get("matching_pillars", []))
-        strengths_str = " | ".join(evaluation.get("key_strengths", []))
-        gaps_str = " | ".join(evaluation.get("gaps_risks", []))
+        pillars_str = ",".join(evaluation.get("matching_pillars", [])) if isinstance(evaluation.get("matching_pillars"), list) else evaluation.get("matching_pillars", "")
+        strengths_str = " | ".join(evaluation.get("key_strengths", [])) if isinstance(evaluation.get("key_strengths"), list) else evaluation.get("key_strengths", "")
+        gaps_str = " | ".join(evaluation.get("gaps_risks", [])) if isinstance(evaluation.get("gaps_risks"), list) else evaluation.get("gaps_risks", "")
         now_str = datetime.utcnow().isoformat() + "Z"
+
+        comp_data = evaluation.get("compensation") or evaluation.get("compensation_estimate")
+        comp_json = json.dumps(comp_data) if comp_data else None
+        reg = evaluation.get("region") or region
 
         cur.execute("""
             INSERT INTO evaluations (
-                posting_id, fit_score, role_archetype, seniority, technical_alignment,
+                posting_id, region, fit_score, role_archetype, seniority, technical_alignment,
                 seniority_impact, location_commute, company_mission, comp_potential,
-                matching_pillars, key_strengths, gaps_risks, pitch_strategy, evaluated_at
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-            ON CONFLICT(posting_id) DO UPDATE SET
+                matching_pillars, key_strengths, gaps_risks, pitch_strategy,
+                opportunity_file, tailored_letter_file, compensation_estimate, evaluated_at
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            ON CONFLICT(posting_id, region) DO UPDATE SET
                 fit_score = excluded.fit_score,
                 role_archetype = excluded.role_archetype,
                 seniority = excluded.seniority,
@@ -128,9 +197,13 @@ def save_evaluation(db_path: Path, evaluation: Dict[str, Any]):
                 key_strengths = excluded.key_strengths,
                 gaps_risks = excluded.gaps_risks,
                 pitch_strategy = excluded.pitch_strategy,
+                opportunity_file = COALESCE(excluded.opportunity_file, evaluations.opportunity_file),
+                tailored_letter_file = COALESCE(excluded.tailored_letter_file, evaluations.tailored_letter_file),
+                compensation_estimate = COALESCE(excluded.compensation_estimate, evaluations.compensation_estimate),
                 evaluated_at = excluded.evaluated_at
         """, (
             evaluation["posting_id"],
+            reg,
             evaluation["fit_score"],
             evaluation.get("role_archetype", ""),
             evaluation.get("seniority", ""),
@@ -143,18 +216,21 @@ def save_evaluation(db_path: Path, evaluation: Dict[str, Any]):
             strengths_str,
             gaps_str,
             evaluation.get("pitch_strategy", ""),
+            evaluation.get("opportunity_file"),
+            evaluation.get("tailored_letter_file"),
+            comp_json,
             now_str
         ))
         cur.execute("UPDATE postings SET status = 'scored' WHERE id = ? AND status = 'new'", (evaluation["posting_id"],))
 
-def get_unscored_postings(db_path: Path) -> List[Dict[str, Any]]:
+def get_unscored_postings(db_path: Path, region: str = "munich") -> List[Dict[str, Any]]:
     with get_db_connection(db_path) as conn:
         cur = conn.cursor()
         cur.execute("""
             SELECT p.* FROM postings p
-            LEFT JOIN evaluations e ON p.id = e.posting_id
+            LEFT JOIN evaluations e ON p.id = e.posting_id AND e.region = ?
             WHERE e.posting_id IS NULL OR p.status = 'new'
-        """)
+        """, (region,))
         return [dict(row) for row in cur.fetchall()]
 
 def get_stats(db_path: Path) -> Dict[str, Any]:
@@ -162,19 +238,28 @@ def get_stats(db_path: Path) -> Dict[str, Any]:
         cur = conn.cursor()
         cur.execute("SELECT COUNT(*) FROM postings")
         total = cur.fetchone()[0]
-        cur.execute("SELECT COUNT(*) FROM evaluations WHERE fit_score >= 85")
-        high_fit = cur.fetchone()[0]
-        cur.execute("SELECT COUNT(*) FROM evaluations WHERE fit_score >= 70 AND fit_score < 85")
-        potential_fit = cur.fetchone()[0]
-        cur.execute("SELECT COUNT(*) FROM evaluations WHERE fit_score < 70")
-        low_fit = cur.fetchone()[0]
+
+        cur.execute("SELECT DISTINCT region FROM evaluations")
+        regions = [r[0] for r in cur.fetchall()] or ["munich"]
+
+        regional_stats = {}
+        for reg in regions:
+            cur.execute("SELECT COUNT(*) FROM evaluations WHERE region = ? AND fit_score >= 85", (reg,))
+            high = cur.fetchone()[0]
+            cur.execute("SELECT COUNT(*) FROM evaluations WHERE region = ? AND fit_score >= 70 AND fit_score < 85", (reg,))
+            pot = cur.fetchone()[0]
+            cur.execute("SELECT COUNT(*) FROM evaluations WHERE region = ? AND fit_score < 70", (reg,))
+            low = cur.fetchone()[0]
+            regional_stats[reg] = {
+                "high_fit": high,
+                "potential_fit": pot,
+                "low_fit": low
+            }
+
         return {
             "total_postings": total,
-            "high_fit_85_plus": high_fit,
-            "potential_fit_70_84": potential_fit,
-            "low_fit_below_70": low_fit
+            "regions": regional_stats
         }
-
 
 def compute_job_id(company: str = "", title: str = "", external_id: Optional[str] = None, url: Optional[str] = None, **kwargs) -> str:
     raw = f"{company.strip().lower()}:{title.strip().lower()}"

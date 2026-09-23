@@ -21,6 +21,17 @@ class Posting:
     status: str = "new"
 
 @dataclass
+class CompensationEstimate:
+    base_salary_min: int
+    base_salary_max: int
+    bonus_pct: float
+    equity_type: str  # "RSUs" | "Stock Options" | "None"
+    total_comp_min: int
+    total_comp_max: int
+    currency: str = "EUR"
+    negotiation_notes: str = ""
+
+@dataclass
 class Evaluation:
     posting_id: str
     fit_score: int
@@ -31,10 +42,12 @@ class Evaluation:
     location_commute: int
     company_mission: int
     comp_potential: int
+    region: str = "munich"
     matching_pillars: List[str] = field(default_factory=list)
     key_strengths: List[str] = field(default_factory=list)
     gaps_risks: List[str] = field(default_factory=list)
     pitch_strategy: str = ""
+    compensation: Optional[CompensationEstimate] = None
 
 @dataclass
 class CandidatePersona:
@@ -53,3 +66,4 @@ class CandidatePersona:
     dealbreaker_keywords: List[str] = field(default_factory=list)
     pillars: List[Dict[str, Any]] = field(default_factory=list)
     narratives: Dict[str, Dict[str, str]] = field(default_factory=dict)
+    regions: Dict[str, Dict[str, Any]] = field(default_factory=dict)

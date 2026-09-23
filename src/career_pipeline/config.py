@@ -50,3 +50,9 @@ def load_persona(persona_path: Path) -> CandidatePersona:
         pillars=data.get("pillars", []),
         narratives=data.get("narratives", {})
     )
+
+def load_config(config_path: Optional[Path] = None) -> Dict[str, Any]:
+    cfg = dict(DEFAULT_CONFIG)
+    if config_path and config_path.exists():
+        cfg.update(load_yaml(config_path))
+    return cfg

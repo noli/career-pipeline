@@ -9,7 +9,7 @@
       "ats_id": "planqc-gmbh",
       "location_filter": [
         "Munich",
-        "M\u00fcnchen",
+        "München",
         "Garching",
         "Germany",
         "Remote"
@@ -23,7 +23,7 @@
       "ats_id": "iqm",
       "location_filter": [
         "Munich",
-        "M\u00fcnchen",
+        "München",
         "Garching",
         "Germany",
         "Hybrid",
@@ -50,7 +50,7 @@
       "location_filter": [
         "Gilching",
         "Munich",
-        "M\u00fcnchen",
+        "München",
         "Bayern",
         "Bavaria",
         "Remote"
@@ -64,7 +64,7 @@
       "ats_id": "the-exploration-company",
       "location_filter": [
         "Munich",
-        "M\u00fcnchen",
+        "München",
         "Germany",
         "Remote"
       ],
@@ -77,7 +77,7 @@
       "ats_id": "proxima-fusion",
       "location_filter": [
         "Munich",
-        "M\u00fcnchen",
+        "München",
         "Germany",
         "Remote"
       ],
@@ -89,9 +89,9 @@
       "ats_type": "toptica",
       "ats_id": "careers.toptica.com",
       "location_filter": [
-        "Gr\u00e4felfing",
+        "Gräfelfing",
         "Munich",
-        "M\u00fcnchen",
+        "München",
         "Germany"
       ],
       "enabled": true
@@ -104,7 +104,7 @@
       "location_filter": [
         "Martinsried",
         "Munich",
-        "M\u00fcnchen"
+        "München"
       ],
       "enabled": true
     },
@@ -115,7 +115,7 @@
       "ats_id": "agilerobotsse",
       "location_filter": [
         "Munich",
-        "M\u00fcnchen",
+        "München",
         "Germany"
       ],
       "enabled": true
@@ -139,9 +139,11 @@
       "ats_id": "helsing",
       "location_filter": [
         "Munich",
-        "M\u00fcnchen",
+        "München",
         "Germany",
-        "Remote"
+        "Remote",
+        "Berlin",
+        "Potsdam"
       ],
       "enabled": true
     },
@@ -152,7 +154,7 @@
       "ats_id": "kiutra",
       "location_filter": [
         "Munich",
-        "M\u00fcnchen"
+        "München"
       ],
       "enabled": true
     },
@@ -163,7 +165,7 @@
       "ats_id": "quantum-diamond",
       "location_filter": [
         "Munich",
-        "M\u00fcnchen"
+        "München"
       ],
       "enabled": true
     },
@@ -174,7 +176,7 @@
       "ats_id": "blickfeld",
       "location_filter": [
         "Munich",
-        "M\u00fcnchen"
+        "München"
       ],
       "enabled": true
     },
@@ -185,9 +187,11 @@
       "ats_id": "celonis",
       "location_filter": [
         "Munich",
-        "M\u00fcnchen",
+        "München",
         "Germany",
-        "Remote"
+        "Remote",
+        "Berlin",
+        "Potsdam"
       ],
       "enabled": true
     },
@@ -198,8 +202,10 @@
       "ats_id": "rolandberger",
       "location_filter": [
         "Munich",
-        "M\u00fcnchen",
-        "Germany"
+        "München",
+        "Germany",
+        "Berlin",
+        "Potsdam"
       ],
       "enabled": true
     },
@@ -215,7 +221,7 @@
       "location_filter": [
         "Windach",
         "Munich",
-        "M\u00fcnchen",
+        "München",
         "Germany",
         "Deutschland"
       ],
@@ -233,7 +239,7 @@
       "location_filter": [
         "Krailling",
         "Munich",
-        "M\u00fcnchen",
+        "München",
         "Germany",
         "Deutschland"
       ],
@@ -246,7 +252,7 @@
       "ats_id": "mynaric",
       "location_filter": [
         "Munich",
-        "M\u00fcnchen",
+        "München",
         "Gilching",
         "Oberpfaffenhofen",
         "Germany"
@@ -260,7 +266,7 @@
       "ats_id": "iceye",
       "location_filter": [
         "Munich",
-        "M\u00fcnchen",
+        "München",
         "Germany"
       ],
       "enabled": true
@@ -272,7 +278,7 @@
       "ats_id": "ororatech",
       "location_filter": [
         "Munich",
-        "M\u00fcnchen",
+        "München",
         "Germany",
         "Remote"
       ],
@@ -285,7 +291,7 @@
       "ats_id": "navvis",
       "location_filter": [
         "Munich",
-        "M\u00fcnchen",
+        "München",
         "Germany",
         "Remote"
       ],
@@ -298,7 +304,7 @@
       "ats_id": "magazino",
       "location_filter": [
         "Munich",
-        "M\u00fcnchen",
+        "München",
         "Germany"
       ],
       "enabled": true
@@ -310,9 +316,11 @@
       "ats_id": "brainlab",
       "location_filter": [
         "Munich",
-        "M\u00fcnchen",
+        "München",
         "Germany",
-        "Remote"
+        "Remote",
+        "Berlin",
+        "Potsdam"
       ],
       "enabled": true
     },
@@ -323,7 +331,7 @@
       "ats_id": "imfusion",
       "location_filter": [
         "Munich",
-        "M\u00fcnchen",
+        "München",
         "Germany"
       ],
       "enabled": true
@@ -335,7 +343,7 @@
       "ats_id": "marvelfusion",
       "location_filter": [
         "Munich",
-        "M\u00fcnchen",
+        "München",
         "Garching",
         "Germany"
       ],
@@ -350,19 +358,21 @@
         "tenant": "ag",
         "site": "Airbus",
         "search_terms": [
-          "M\u00fcnchen",
+          "München",
           "Munich",
           "Ottobrunn",
           "Taufkirchen"
         ]
       },
       "location_filter": [
-        "M\u00fcnchen",
+        "München",
         "Munich",
         "Ottobrunn",
         "Taufkirchen",
         "Germany",
-        "Deutschland"
+        "Deutschland",
+        "Berlin",
+        "Potsdam"
       ],
       "enabled": true
     },
@@ -374,14 +384,14 @@
         "base_url": "https://jobs.hensoldt.net",
         "search_terms": [
           "Taufkirchen",
-          "M\u00fcnchen",
+          "München",
           "Oberkochen"
         ],
         "max_pages": 2
       },
       "location_filter": [
         "Taufkirchen",
-        "M\u00fcnchen",
+        "München",
         "Munich",
         "Oberkochen",
         "Germany",
@@ -396,16 +406,18 @@
       "ats_config": {
         "base_url": "https://careers.knorr-bremse.com",
         "search_terms": [
-          "M\u00fcnchen",
+          "München",
           "Munich"
         ],
         "max_pages": 2
       },
       "location_filter": [
-        "M\u00fcnchen",
+        "München",
         "Munich",
         "Germany",
-        "Deutschland"
+        "Deutschland",
+        "Berlin",
+        "Potsdam"
       ],
       "enabled": true
     },
@@ -417,14 +429,16 @@
         "base_url": "https://jobs.rohde-schwarz.com/en_US/careers",
         "search_terms": [
           "Munich",
-          "M\u00fcnchen"
+          "München"
         ]
       },
       "location_filter": [
         "Munich",
-        "M\u00fcnchen",
+        "München",
         "Germany",
-        "Deutschland"
+        "Deutschland",
+        "Berlin",
+        "Potsdam"
       ],
       "enabled": true
     },
@@ -436,14 +450,16 @@
         "base_url": "https://jobs.siemens.com/en_US/externaljobs",
         "search_terms": [
           "Munich",
-          "M\u00fcnchen"
+          "München"
         ]
       },
       "location_filter": [
         "Munich",
-        "M\u00fcnchen",
+        "München",
         "Germany",
-        "Deutschland"
+        "Deutschland",
+        "Berlin",
+        "Potsdam"
       ],
       "enabled": true
     },
@@ -453,7 +469,7 @@
       "ats_type": "mtu",
       "ats_config": {},
       "location_filter": [
-        "M\u00fcnchen",
+        "München",
         "Munich",
         "Germany",
         "Deutschland"
@@ -470,12 +486,12 @@
         "site": "NVIDIAExternalCareerSite",
         "search_terms": [
           "Munich",
-          "M\u00fcnchen"
+          "München"
         ]
       },
       "location_filter": [
         "Munich",
-        "M\u00fcnchen",
+        "München",
         "Germany"
       ],
       "enabled": true
@@ -487,18 +503,40 @@
       "ats_id": "mobileye",
       "location_filter": [
         "Munich",
-        "M\u00fcnchen",
+        "München",
         "Germany",
         "Deutschland",
         "Koblenz",
         "Stuttgart"
       ],
       "enabled": true
+    },
+    {
+      "name": "ASML",
+      "sector": "Semiconductor Lithography, Metrology & Precision Optics",
+      "ats_type": "workday",
+      "ats_config": {
+        "host": "asml.wd3.myworkdayjobs.com",
+        "tenant": "asml",
+        "site": "ASML_Careers",
+        "search_terms": [
+          "Berlin",
+          "Munich",
+          "München"
+        ]
+      },
+      "location_filter": [
+        "Berlin",
+        "Munich",
+        "München",
+        "Germany"
+      ],
+      "enabled": true
     }
   ],
   "ecosystem_queries": [
     "site:careers.qualcomm.com Munich (Engineer OR Architect OR Manager OR Lead)",
-    "site:job.deloitte.com (M\u00fcnchen OR Munich) (AI OR Quantum OR Tech OR Strategy OR Architect)",
+    "site:job.deloitte.com (München OR Munich) (AI OR Quantum OR Tech OR Strategy OR Architect)",
     "site:jobs.apple.com/en-us/details Munich (Silicon OR PMIC OR Hardware OR Manager)",
     "site:infineon.com/cms/en/careers Munich (System OR Director OR Architect OR Lead)",
     "site:mckinsey.com/careers Munich (Quantum OR Semiconductor OR Automotive OR Associate OR Consultant)",
@@ -508,17 +546,21 @@
     "site:zeiss.com/corporate/en/careers (Munich OR Oberkochen OR Garching) (Lithography OR SMT OR Optics OR Robotics OR Meditec)",
     "site:trumpf.com/en_INT/careers (Munich OR Germany) (Laser OR EUV OR Photonics)",
     "(\"Senior Physiker\" OR \"Optics Engineer\" OR \"Semiconductor Packaging\" OR \"LiDAR\") (\"Windach\" OR \"Krailling\" OR \"Puchheim\" OR \"Garching\" OR \"Martinsried\") (job OR karriere)",
-    "(\"quantum computing\" OR \"quantencomputing\" OR \"quantum hardware\" OR \"qubit\") (job OR stelle) (Munich OR M\u00fcnchen OR Garching OR Remote)",
+    "(\"quantum computing\" OR \"quantencomputing\" OR \"quantum hardware\" OR \"qubit\") (job OR stelle) (Munich OR München OR Garching OR Remote)",
     "(\"Deep Tech\" OR \"Quantum\" OR \"Automotive\" OR \"Sensors\") (\"Principal Consultant\" OR \"Senior Manager\" OR \"Associate Partner\" OR \"Technology Advisor\") (Munich OR Remote OR Germany)",
     "(\"Engineering Manager\" OR \"Director of Hardware\" OR \"Head of Systems\" OR \"Director of Technology\") (Munich OR Remote OR Germany)",
-    "(\"optical engineer\" OR \"photonics\" OR \"laser\" OR \"lidar\") (job OR career) (Munich OR M\u00fcnchen OR Munich Area OR Gilching OR Remote)",
+    "(\"optical engineer\" OR \"photonics\" OR \"laser\" OR \"lidar\") (job OR career) (Munich OR München OR Munich Area OR Gilching OR Remote)",
     "(\"laser communication\" OR \"satellite\" OR \"payload\" OR \"star tracker\") (job OR career) (Munich OR Gilching OR Oberpfaffenhofen OR Remote)",
     "(\"surgical robotics\" OR \"surgical navigation\" OR \"medical robotics\" OR \"medical imaging\") (engineer OR lead OR manager) (Munich OR Remote)",
     "(\"fusion energy\" OR \"plasma diagnostics\" OR \"stellarator\" OR \"inertial confinement\") (physicist OR engineer OR lead) (Munich OR Garching OR Germany)",
-    "(\"spatial ai\" OR \"mobile robotics\" OR \"slam\" OR \"point cloud\" OR \"amr\") (lead OR principal OR manager) (Munich OR M\u00fcnchen OR Remote)",
+    "(\"spatial ai\" OR \"mobile robotics\" OR \"slam\" OR \"point cloud\" OR \"amr\") (lead OR principal OR manager) (Munich OR München OR Remote)",
     "(\"lithography\" OR \"euv\" OR \"wafer metrology\" OR \"precision optics\") (engineer OR architect OR lead) (Munich OR Germany OR Remote)",
-    "(\"autonomy hardware\" OR \"sensor fusion\" OR \"autonomous driving\" OR \"adas\") (lead OR senior OR principal) (Munich OR M\u00fcnchen OR Remote)",
-    "(\"Chief Engineer\" OR \"Head of Hardware\" OR \"Principal TPM\") (Munich OR M\u00fcnchen OR Remote)",
-    "(\"Forward Deployed Engineer\" OR \"Agentic AI\" OR \"Solutions Architect\") (Remote Germany OR Munich)"
+    "(\"autonomy hardware\" OR \"sensor fusion\" OR \"autonomous driving\" OR \"adas\") (lead OR senior OR principal) (Munich OR München OR Remote)",
+    "(\"Chief Engineer\" OR \"Head of Hardware\" OR \"Principal TPM\") (Munich OR München OR Remote)",
+    "(\"Forward Deployed Engineer\" OR \"Agentic AI\" OR \"Solutions Architect\") (Remote Germany OR Munich)",
+    "site:jobs.siemens.com Berlin (AI OR Systems OR Lead OR Architect)",
+    "site:careers.rohde-schwarz.com Berlin (Software OR Lead OR Manager)",
+    "(\"quantum computing\" OR \"quantencomputing\" OR \"photonics\" OR \"optics\") (job OR stelle) (Berlin OR Potsdam OR Remote)",
+    "(\"Principal TPM\" OR \"Director of Hardware\" OR \"Engineering Manager\" OR \"Head of Systems\") (Berlin OR Remote Germany)"
   ]
 }
