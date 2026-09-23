@@ -195,12 +195,12 @@ def generate_vault_opportunity_note(
 
     note_content = f"""---
 type: Opportunity
-title: \"{company} — {title}\"
-description: \"Match Score {score}% ({archetype}) in {location}\"
-resource: \"{canonical_url}\"
+title: "{company} — {title}"
+description: "Match Score {score}% ({archetype}) in {location}"
+resource: "{canonical_url}"
 status: {existing_status}
 match_score: {score}
-role_archetype: \"{archetype}\"
+role_archetype: "{archetype}"
 region: [{regions_str}]
 tags: [career, opportunity, {comp_slug}, {eval_region}]
 stale_after: {stale_iso}
@@ -413,8 +413,8 @@ Curated, high-fit job opportunities segmented by active job hunting regions. Mar
     # 2. Dedicated Regional Index: Munich.md
     munich_content = rf"""---
 type: Directory
-title: \"Munich Career Opportunities Pipeline\"
-description: \"Curated high-affinity job opportunities in the Munich Metropolitan Area (>= 85%)\"
+title: "Munich Career Opportunities Pipeline"
+description: "Curated high-affinity job opportunities in the Munich Metropolitan Area (>= 85%)"
 tags: [career, pipeline, munich]
 ---
 
@@ -434,8 +434,8 @@ Curated opportunities within a 60-minute commute within the Munich Metropolitan 
     # 3. Dedicated Regional Index: Berlin.md
     berlin_content = rf"""---
 type: Directory
-title: \"Berlin Career Opportunities Pipeline\"
-description: \"Curated high-affinity job opportunities in the Berlin-Brandenburg Area (>= 85%)\"
+title: "Berlin Career Opportunities Pipeline"
+description: "Curated high-affinity job opportunities in the Berlin-Brandenburg Area (>= 85%)"
 tags: [career, pipeline, berlin]
 ---
 
