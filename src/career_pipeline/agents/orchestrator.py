@@ -47,7 +47,7 @@ class CareerOrchestrator:
             companies_path=self.companies_path,
             inbox_dir=self.inbox_dir
         )
-        print(f"  [Harvester Complete] Discovered {crawl_res[total_new]} new postings.")
+        print(f"  [Harvester Complete] Discovered {crawl_res.get("total_new", 0)} new postings.")
 
         # 2. Fit Evaluator Subagent
         print(f"\nStep 2: Spawning Fit Evaluator Subagent across regions: {active_regions}...")
@@ -56,7 +56,7 @@ class CareerOrchestrator:
         # 3. Writer & Compensation Subagent
         print(f"\nStep 3: Spawning Comp & Writer Subagent...")
         write_res = self.writer.sync_vault_and_letters(compile_pdf=compile_pdf)
-        print(f"  [Writer Complete] Synced {write_res.get(notes_synced, 0)} notes and {write_res.get(letters_generated, 0)} letters.")
+        print(f"  [Writer Complete] Synced {write_res.get("notes_synced", 0)} notes and {write_res.get("letters_generated", 0)} letters.")
 
         print(f"\n=== [CareerOrchestrator] Autonomous Pipeline Completed Successfully ===")
         return {

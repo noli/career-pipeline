@@ -1132,6 +1132,12 @@ class SerpApiClient:
     """
     BASE_URL = "https://serpapi.com/search.json"
 
+    def __init__(self, api_key: Optional[str] = None):
+        self._api_key = api_key or self.get_api_key()
+
+    def is_available(self) -> bool:
+        return bool(self._api_key or self.get_api_key())
+
     @classmethod
     def get_api_key(cls) -> Optional[str]:
         key = os.environ.get("SERPAPI_API_KEY")
