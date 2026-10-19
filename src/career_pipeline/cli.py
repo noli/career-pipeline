@@ -25,6 +25,7 @@ def main():
     parser.add_argument("--evaluate", action="store_true", help="Score all unscored postings across regions")
     parser.add_argument("--generate", action="store_true", help="Generate opportunity notes, cover letters, and PDFs for high matches")
     parser.add_argument("--no-compile", action="store_true", help="Skip headless Tectonic PDF compilation")
+    parser.add_argument("--force", action="store_true", help="Force re-generating all cover letters and notes")
     parser.add_argument("--region", type=str, default="all", choices=["all", "munich", "berlin"], help="Target region for evaluation (default: all)")
     parser.add_argument("--stats", action="store_true", help="Print pipeline database metrics broken down by region")
     parser.add_argument("--inbox", action="store_true", help="Parse .eml/.msg files from inbox directory")
@@ -91,7 +92,7 @@ def main():
         return
 
     if args.all:
-        orchestrator.run_full_pipeline(regions=target_regions, compile_pdf=not args.no_compile)
+        orchestrator.run_full_pipeline(regions=target_regions, compile_pdf=not args.no_compile, force=args.force)
         return
 
     if args.sync_mail:
@@ -114,7 +115,7 @@ def main():
         orchestrator.evaluator.evaluate_all_regions(regions=target_regions)
 
     if args.generate:
-        orchestrator.writer.sync_vault_and_letters(compile_pdf=not args.no_compile)
+        orchestrator.writer.sync_vault_and_letters(compile_pdf=not args.no_compile, force=args.force)
 
 if __name__ == "__main__":
     main()

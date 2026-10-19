@@ -81,7 +81,8 @@ def load_vault_persona(vault_career_dir: Path) -> Optional[CandidatePersona]:
         target_locations=regions["munich"]["target_locations"],
         excluded_locations=regions["munich"]["excluded_locations"],
         pillars=pillars,
-        regions=regions
+        regions=regions,
+        interests=["optics and optical design", "complex autonomous systems", "managing versatile teams on technical challenges"]
     )
 
 def generate_vault_opportunity_note(

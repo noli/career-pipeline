@@ -67,3 +67,4 @@ class CandidatePersona:
     pillars: List[Dict[str, Any]] = field(default_factory=list)
     narratives: Dict[str, Dict[str, str]] = field(default_factory=dict)
     regions: Dict[str, Dict[str, Any]] = field(default_factory=dict)
+    interests: List[str] = field(default_factory=list)

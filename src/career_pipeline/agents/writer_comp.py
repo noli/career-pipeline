@@ -19,7 +19,7 @@ class WriterAndCompSubagent:
         self.vault_dir = vault_dir
         self.template_path = template_path
 
-    def sync_vault_and_letters(self, compile_pdf: bool = True) -> Dict[str, Any]:
+    def sync_vault_and_letters(self, compile_pdf: bool = True, force: bool = False) -> Dict[str, Any]:
         """Generates opportunity notes, cover letters, PDFs, and updates regional indices."""
         if not self.vault_dir or not self.vault_dir.exists():
             return {"status": "skipped", "reason": "No vault directory configured"}
@@ -66,17 +66,19 @@ class WriterAndCompSubagent:
                     tex_file = letters_dir / f"{comp_slug}_{title_slug}.tex"
                     pdf_file = pdf_dir / f"{comp_slug}_{title_slug}.pdf"
 
-                    if not tex_file.exists() or not pdf_file.exists():
-                        generate_cover_letter(
+                    if force or not tex_file.exists() or not pdf_file.exists():
+                        res = generate_cover_letter(
                             posting=r,
                             evaluation=r,
                             persona=self.persona,
                             template_path=self.template_path,
                             output_dir=letters_dir,
                             pdf_dir=pdf_dir,
-                            compile_pdf=compile_pdf
+                            compile_pdf=compile_pdf,
+                            force=force
                         )
-                        generated_letters += 1
+                        if not res.get("skipped", False):
+                            generated_letters += 1
 
         # Rebuild master index.md, Munich.md, and Berlin.md
         update_vault_opportunities_index(self.vault_dir)

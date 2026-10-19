@@ -36,7 +36,7 @@ class CareerOrchestrator:
             template_path=self.template_path
         )
 
-    def run_full_pipeline(self, regions: Optional[List[str]] = None, compile_pdf: bool = True) -> Dict[str, Any]:
+    def run_full_pipeline(self, regions: Optional[List[str]] = None, compile_pdf: bool = True, force: bool = False) -> Dict[str, Any]:
         """Runs end-to-end multi-agent pipeline: Ingestion -> Multi-Region Scoring -> Artifact Generation."""
         print("=== [CareerOrchestrator] Starting Autonomous Multi-Agent Pipeline ===")
         active_regions = regions or list(self.persona.regions.keys()) or ["munich", "berlin"]
@@ -55,7 +55,7 @@ class CareerOrchestrator:
 
         # 3. Writer & Compensation Subagent
         print(f"\nStep 3: Spawning Comp & Writer Subagent...")
-        write_res = self.writer.sync_vault_and_letters(compile_pdf=compile_pdf)
+        write_res = self.writer.sync_vault_and_letters(compile_pdf=compile_pdf, force=force)
         print(f"  [Writer Complete] Synced {write_res.get("notes_synced", 0)} notes and {write_res.get("letters_generated", 0)} letters.")
 
         print(f"\n=== [CareerOrchestrator] Autonomous Pipeline Completed Successfully ===")
