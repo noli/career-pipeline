@@ -42,6 +42,7 @@ class Evaluation:
     location_commute: int
     company_mission: int
     comp_potential: int
+    role_track: str = "Engineering & Technical"
     region: str = "munich"
     matching_pillars: List[str] = field(default_factory=list)
     key_strengths: List[str] = field(default_factory=list)

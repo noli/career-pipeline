@@ -10,7 +10,7 @@ from ..models import CandidatePersona
 from ..storage.db import get_db_connection
 from ..generator.letter_engine import generate_cover_letter
 from ..generator.typography import slugify
-from ..integrations.obsidian import generate_vault_opportunity_note, update_vault_opportunities_index
+from ..integrations.obsidian import generate_vault_opportunity_note, update_vault_opportunities_index, generate_vault_digest
 
 class WriterAndCompSubagent:
     def __init__(self, db_path: Path, persona: CandidatePersona, vault_dir: Optional[Path] = None, template_path: Optional[Path] = None):
@@ -35,7 +35,7 @@ class WriterAndCompSubagent:
         with get_db_connection(self.db_path) as conn:
             cur = conn.cursor()
             cur.execute("""
-                SELECT p.*, e.region, e.fit_score, e.role_archetype, e.matching_pillars,
+                SELECT p.*, e.region, e.fit_score, e.role_archetype, e.role_track, e.seniority, e.matching_pillars,
                        e.key_strengths, e.gaps_risks, e.pitch_strategy, e.compensation_estimate
                 FROM postings p JOIN evaluations e ON p.id = e.posting_id
                 WHERE e.fit_score >= 85
@@ -82,6 +82,7 @@ class WriterAndCompSubagent:
 
         # Rebuild master index.md, Munich.md, and Berlin.md
         update_vault_opportunities_index(self.vault_dir)
+        generate_vault_digest(self.vault_dir)
 
         return {
             "status": "success",

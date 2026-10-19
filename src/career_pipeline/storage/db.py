@@ -116,6 +116,16 @@ def init_db(db_path: Path):
                 );
             """)
 
+        # Check if role_track column exists
+        try:
+            cur = conn.cursor()
+            cur.execute("PRAGMA table_info(evaluations)")
+            cols = [r[1] for r in cur.fetchall()]
+            if 'role_track' not in cols:
+                conn.execute("ALTER TABLE evaluations ADD COLUMN role_track TEXT;")
+        except Exception:
+            pass
+
         conn.execute("CREATE INDEX IF NOT EXISTS idx_postings_status ON postings(status);")
         conn.execute("CREATE INDEX IF NOT EXISTS idx_evaluations_score_reg ON evaluations(region, fit_score);")
 
@@ -179,14 +189,15 @@ def save_evaluation(db_path: Path, evaluation: Dict[str, Any], region: str = "mu
 
         cur.execute("""
             INSERT INTO evaluations (
-                posting_id, region, fit_score, role_archetype, seniority, technical_alignment,
+                posting_id, region, fit_score, role_archetype, role_track, seniority, technical_alignment,
                 seniority_impact, location_commute, company_mission, comp_potential,
                 matching_pillars, key_strengths, gaps_risks, pitch_strategy,
                 opportunity_file, tailored_letter_file, compensation_estimate, evaluated_at
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             ON CONFLICT(posting_id, region) DO UPDATE SET
                 fit_score = excluded.fit_score,
                 role_archetype = excluded.role_archetype,
+                role_track = excluded.role_track,
                 seniority = excluded.seniority,
                 technical_alignment = excluded.technical_alignment,
                 seniority_impact = excluded.seniority_impact,
@@ -206,6 +217,7 @@ def save_evaluation(db_path: Path, evaluation: Dict[str, Any], region: str = "mu
             reg,
             evaluation["fit_score"],
             evaluation.get("role_archetype", ""),
+            evaluation.get("role_track", "Engineering & Technical"),
             evaluation.get("seniority", ""),
             evaluation.get("technical_alignment", 0),
             evaluation.get("seniority_impact", 0),

@@ -7,7 +7,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "src"))
 
 import unittest
 from career_pipeline.models import CandidatePersona
-from career_pipeline.evaluator.matcher import evaluate_job
+from career_pipeline.evaluator.matcher import evaluate_job, classify_track
 
 class TestMatcher(unittest.TestCase):
     def setUp(self):
@@ -88,6 +88,23 @@ class TestMatcher(unittest.TestCase):
         self.assertGreaterEqual(b_res["fit_score"], 85)
         self.assertIn("compensation_estimate", m_res)
         self.assertGreaterEqual(m_res["compensation_estimate"]["base_salary_min"], 120000)
+
+    def test_track_classification(self):
+        # Executive & Leadership titles
+        self.assertEqual(classify_track("Director of Engineering"), "Executive & Leadership")
+        self.assertEqual(classify_track("Head of Autonomy (m/f/d)"), "Executive & Leadership")
+        self.assertEqual(classify_track("Chief Engineer SATCOM"), "Executive & Leadership")
+        self.assertEqual(classify_track("Engineering Manager - Control Systems"), "Executive & Leadership")
+        self.assertEqual(classify_track("Team Lead Applied AI"), "Executive & Leadership")
+        self.assertEqual(classify_track("Program Director"), "Executive & Leadership")
+        self.assertEqual(classify_track("Electronics Team Leader"), "Executive & Leadership")
+
+        # Engineering & Technical titles
+        self.assertEqual(classify_track("Senior Optical Engineer (m/f/d)"), "Engineering & Technical")
+        self.assertEqual(classify_track("Senior Staff Software Engineer, Perception"), "Engineering & Technical")
+        self.assertEqual(classify_track("Computational Physicist"), "Engineering & Technical")
+        self.assertEqual(classify_track("Wavefront Scientist"), "Engineering & Technical")
+        self.assertEqual(classify_track("Systems Architect"), "Engineering & Technical")
 
 if __name__ == "__main__":
     unittest.main()

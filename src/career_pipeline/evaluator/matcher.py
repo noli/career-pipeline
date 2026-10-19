@@ -2,6 +2,7 @@
 career_pipeline.evaluator.matcher - Configurable Persona-Based Job Matching Engine
 Evaluates job postings dynamically against a CandidatePersona for a specific region.
 Calculates weighted match scores (0-100), extracts pitch strengths, flags gap risks, and estimates compensation.
+Distinguishes between 'Executive & Leadership' and 'Engineering & Technical' career tracks.
 """
 import re
 from typing import Dict, Any, List, Tuple
@@ -20,10 +21,38 @@ DEFAULT_NON_TECH_KEYWORDS = [
     "receptionist", "facility manager"
 ]
 
+def classify_track(title: str, archetype: str = "") -> str:
+    """
+    Categorizes a role into 'Executive & Leadership' or 'Engineering & Technical'.
+    'Executive & Leadership': high-responsibility leadership, management, directorial, or program authority.
+    'Engineering & Technical': deep-tech specialist, individual contributor, research, simulation, design.
+    """
+    t_lower = (title or "").lower()
+    
+    exec_lead_keywords = [
+        "director", "vice president", "vp", "head of", "chief engineer", "chief architect",
+        "cto", "program director", "lead project manager", "engineering manager", "engineering lead",
+        "team lead", "team leader", "teamleader", "group lead", "technical lead", "tech lead",
+        "lead engineer", "lead systems engineer", "lead development scientist", "lead machine learning",
+        "lead perception", "principal enterprise architect", "partner", "practice lead", "associate partner",
+        "senior manager", "manager workplace & office technology", "forward-deployed ai 2 lead",
+        "head of ip", "head of systems", "head of controls", "head of autonomy"
+    ]
+    for kw in exec_lead_keywords:
+        if kw in t_lower:
+            return "Executive & Leadership"
+            
+    # Check for word boundary 'lead', 'head', 'director', 'manager' (excluding technical terms like lead-free)
+    if re.search(r"\b(lead|head|director|manager)\b", t_lower):
+        if not re.search(r"\blead-free\b", t_lower):
+            return "Executive & Leadership"
+            
+    return "Engineering & Technical"
+
 def evaluate_job(posting: Dict[str, Any], persona: CandidatePersona, region: str = "munich") -> Dict[str, Any]:
     """
     Evaluates a normalized job posting against the CandidatePersona for a given geographic region.
-    Returns a comprehensive evaluation dictionary including regional compensation estimate.
+    Returns a comprehensive evaluation dictionary including regional compensation estimate and track classification.
     """
     title = posting.get("title", "").lower()
     raw_content = posting.get("raw_content", "").lower()
@@ -40,7 +69,6 @@ def evaluate_job(posting: Dict[str, Any], persona: CandidatePersona, region: str
         dealbreakers.append("Junior, administrative, or non-technical role title")
 
     # 2. Regional Location Filtering
-    # Check if persona has specific regional settings, else fallback
     reg_cfg = persona.regions.get(reg_key, {})
     target_locs = reg_cfg.get("target_locations") or (persona.target_locations if reg_key == "munich" else [reg_key, "remote", "germany"])
     excluded_locs = reg_cfg.get("excluded_locations") or persona.excluded_locations
@@ -60,19 +88,16 @@ def evaluate_job(posting: Dict[str, Any], persona: CandidatePersona, region: str
     elif not is_target_commute and not is_remote and location and not any(re.search(r"\b" + re.escape(c) + r"\b", location) for c in ["germany", "deutschland", "remote"]):
         dealbreakers.append(f"Location outside target {reg_key.title()} commute area ({location})")
 
-    # 3. Seniority & Impact Scoring (max 25)
+    # 3. Track Classification & Seniority Scoring (max 25)
+    role_track = classify_track(title)
     seniority_impact = 0
     seniority_label = "Senior"
     
-    if any(kw in title for kw in [
-        "head of", "director", "chief engineer", "vice president", "vp", 
-        "group lead", "team lead", "engineering lead", "technical lead", "tech lead",
-        "engineering manager", "partner", "associate partner", "senior manager"
-    ]):
+    if role_track == "Executive & Leadership":
         seniority_impact = 25
         seniority_label = "Lead / Executive"
     elif any(kw in title for kw in [
-        "principal", "staff", "technical lead manager", "tlm", "lead ", "architect",
+        "principal", "staff", "technical lead manager", "tlm", "architect",
         "managing consultant", "senior consultant"
     ]):
         seniority_impact = 22
@@ -125,12 +150,12 @@ def evaluate_job(posting: Dict[str, Any], persona: CandidatePersona, region: str
     if matching_pillars:
         archetype = matching_pillars[0]
     else:
-        archetype = "Engineering Leadership"
+        archetype = "Engineering Leadership" if role_track == "Executive & Leadership" else "Hardware & Systems Engineering"
 
     # Strengths and Gaps
     key_strengths = [
+        f"Career track alignment: {role_track} ({seniority_label})",
         f"Matches {len(matching_pillars)} core expertise pillars: {', '.join(matching_pillars[:2])}",
-        f"Seniority alignment: {seniority_label} level scope",
         f"Geographic / Work-mode fit: {'Remote / Hybrid' if is_remote else target_locs[0].title() + ' Commuting Area'}"
     ]
 
@@ -138,6 +163,7 @@ def evaluate_job(posting: Dict[str, Any], persona: CandidatePersona, region: str
         "posting_id": posting.get("id", ""),
         "region": reg_key,
         "fit_score": fit_score,
+        "role_track": role_track,
         "role_archetype": archetype,
         "seniority": seniority_label,
         "technical_alignment": tech_score,
@@ -148,7 +174,7 @@ def evaluate_job(posting: Dict[str, Any], persona: CandidatePersona, region: str
         "matching_pillars": matching_pillars,
         "key_strengths": key_strengths,
         "gaps_risks": dealbreakers,
-        "pitch_strategy": f"Align expertise in {archetype} with {company}'s strategic mission."
+        "pitch_strategy": f"Align expertise in {archetype} ({role_track}) with {company}'s strategic mission."
     }
 
     # Attach estimated compensation
